@@ -5,3 +5,8 @@ ATMAbout = Ce module a été développé par <a href="http://www.atm-consulting.
 
 remisetotalSetup = Configuration du module remisetotal
 remisetotalAbout = A propos du module Remise sur total
+
+# SETUP
+remisetotalAddButtonOnPropal=Ajouter le bouton sur les propositions commerciales
+remisetotalAddButtonOnOrder=Ajouter le bouton sur les commandes clients
+remisetotalAddButtonOnInvoice=Ajouter le bouton sur les factures clients
