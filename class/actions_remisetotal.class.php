@@ -61,7 +61,7 @@ class Actionsremisetotal
 	 */
 	function doActions($parameters, &$object, &$action, $hookmanager)
 	{
-		$error = 0; // Error counter
+		/*$error = 0; // Error counter
 		$myvalue = 'test'; // A result value
 
 		print_r($parameters);
@@ -83,6 +83,31 @@ class Actionsremisetotal
 		{
 			$this->errors[] = 'Error message';
 			return -1;
-		}
+		}*/
 	}
+
+	function addMoreActionsButtons($parameters, &$object, &$action, $hookmanager)
+	{
+		global $conf;
+		
+		switch ($parameters['currentcontext']) 
+		{
+			case 'propalcard':
+				if ($conf->global->REMISETOTAL_ADD_BUTTON_ON_PROPAL) $this->_printForm($object, $action);
+				break;
+			case 'ordercard':
+				if ($conf->global->REMISETOTAL_ADD_BUTTON_ON_ORDER) $this->_printForm($object, $action);
+				break;
+			case 'invoicecard':
+				if ($conf->global->REMISETOTAL_ADD_BUTTON_ON_INVOICE) $this->_printForm($object, $action);
+				break;
+		}
+		
+	}
+	
+	private function _printForm(&$object, $action)
+	{
+		echo 'form';
+	}
+	
 }
