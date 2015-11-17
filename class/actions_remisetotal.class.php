@@ -48,6 +48,9 @@ class Actionsremisetotal
 	 */
 	public function __construct()
 	{
+		global $langs;
+		
+		$langs->load('remisetotal@remisetotal');
 	}
 
 	/**
@@ -93,10 +96,10 @@ class Actionsremisetotal
 		switch ($parameters['currentcontext']) 
 		{
 			case 'propalcard':
-				if ($conf->global->REMISETOTAL_ADD_BUTTON_ON_PROPAL) $this->_printForm($object, $action);
+				if ($conf->global->REMISETOTAL_ADD_BUTTON_ON_PROPAL) $this->_printForm($object, $action, '/comm/propal.php?id='.$object->id);
 				break;
 			case 'ordercard':
-				if ($conf->global->REMISETOTAL_ADD_BUTTON_ON_ORDER) $this->_printForm($object, $action);
+				if ($conf->global->REMISETOTAL_ADD_BUTTON_ON_ORDER) $this->_printForm($object, $action, '/commande/card.php?id='.$object->id);
 				break;
 			case 'invoicecard':
 				if ($conf->global->REMISETOTAL_ADD_BUTTON_ON_INVOICE) $this->_printForm($object, $action);
@@ -105,9 +108,73 @@ class Actionsremisetotal
 		
 	}
 	
-	private function _printForm(&$object, $action)
+	private function _printForm(&$object, $action, $url)
 	{
-		echo 'form';
+		global $langs;
+		
+		$html = '
+			<div class="inline-block divButAction">
+				<a id="remisetotalButton" class="butAction" href="#">'.$langs->trans('remisetotalLabelButton').'</a>
+			</div>
+		';
+		
+		echo $html;
+		
+		/*if ($action == 'remisetotal')
+		{*/
+			?>
+		 	<script type="text/javascript">
+				$(document).ready(function() {
+					
+					function promptRemiseTotal(url_to, url_ajax)
+					{
+						var total = "<?php echo price($object->total_ttc); ?>";
+					    $( "#dialog-prompt-remisetotal" ).remove();
+					    $('body').append('<div id="dialog-prompt-remisetotal"><input id="remisetotal-title" size=30 value="'+total+'" /></div>');
+					    
+					    $( "#dialog-prompt-remisetotal" ).dialog({
+	                    	resizable: false,
+	                        height:140,
+	                        modal: true,
+	                        title: "<?php echo $langs->transnoentitiesnoconv('remisetotalNewTotal') ?>",
+	                        buttons: {
+	                            "Ok": function() {
+	                                $.ajax({
+	                                	url: url_ajax
+	                                	,data: {
+	                                		fk_object: <?php echo (int) $object->id; ?>
+	                                		,element: "<?php echo $object->element; ?>"
+	                                		,newTotal: $(this).find('#remisetotal-title').val()
+	                                	}
+	                                }).then(function (data) {
+	                                	//document.location.href=url_to;
+	                                	console.log(data);
+	                                });
+
+                                    $( this ).dialog( "close" );
+	                            },
+	                            "<?php echo $langs->trans('Cancel') ?>": function() {
+	                                $( this ).dialog( "close" );
+	                            }
+	                        }
+	                    });
+					}
+					
+					$('a#remisetotalButton').click(function() 
+					{
+						promptRemiseTotal(
+							'<?php echo dol_buildpath($url, 1); ?>'
+							,'<?php echo dol_buildpath('/remisetotal/script/interface.php', 2); ?>'
+						     
+						);
+						return false;
+					});
+					
+				});
+		 	</script>
+		 <?php
+		//}
+		
 	}
 	
 }
