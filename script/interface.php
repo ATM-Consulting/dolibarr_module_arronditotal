@@ -17,6 +17,8 @@
 	$object = new $className($db);
 	$object->fetch($fk_object);
 	
+	_exitOrNot($object, $className);
+	
 	if (empty($conf->global->REMISETOTAL_QTY_NEEDED_TO_UPDATE))
 	{
 		$coef = $newTotal / $object->total_ttc;
@@ -70,6 +72,25 @@
 	else
 	{
 		setEventMessages($langs->trans('remisetotalErrorNoLine'), null, 'errors');
+	}
+	
+	function _exitOrNot(&$object, $className)
+	{
+		if ($object->statut != $className::STATUS_DRAFT)
+		{
+			setEventMessages($langs->trans('remisetotalErrorObjectNotDraft'), null, 'errors');
+			exit;
+		}
+		
+		if ($object->element == 'facture')
+		{
+			if ($object->type == Facture::TYPE_REPLACEMENT || $object->type == Facture::TYPE_CREDIT_NOTE || $object->type == Facture::TYPE_SITUATION)
+			{
+				setEventMessages($langs->trans('remisetotalErrorTypeInvoice'), null, 'errors');
+				exit;
+			}
+		}
+		
 	}
 	
 	function _updateLine(&$object, &$line, $pu)
