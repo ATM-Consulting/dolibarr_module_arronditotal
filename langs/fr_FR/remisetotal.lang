@@ -15,3 +15,6 @@ remisetotalUpdateLineWithQty=Quantité nécessaire sur les lignes pour re-calcul
 # DOCUMENT
 remisetotalLabelButton=Modifier total
 remisetotalNewTotal=Nouveau total TTC
+
+# ERROR
+remisetotalErrorNoLine=Erreur : aucune ligne trouvée pour recalculer le total

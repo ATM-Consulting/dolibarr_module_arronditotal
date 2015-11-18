@@ -67,6 +67,10 @@
 		
 		_updateLine($object, $lastLine, $pu);
 	}
+	else
+	{
+		setEventMessages($langs->trans('remisetotalErrorNoLine'), null, 'errors');
+	}
 	
 	function _updateLine(&$object, &$line, $pu)
 	{
