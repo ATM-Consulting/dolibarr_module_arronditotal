@@ -18,16 +18,38 @@
 	$object->fetch($fk_object);
 	
 	$coef = $newTotal / $object->total_ttc;
+	$i = 0;
 	
-	$TPu = array();
 	foreach ($object->lines as $line)
 	{
-		$pu = $line->subprice * (1+$line->tva_tx); // calcul du ttc unitaire
+		$tx_tva = 1 + ($line->tva_tx / 100);
+		$pu = $line->subprice * $tx_tva; // calcul du ttc unitaire
 		$pu = $pu * $coef; // on applique le coef de réduction
-		$pu = $pu / (1+$line->tva_tx); // calcul du nouvel ht unitaire
-		$pu = round($pu, 3); //le round à 3 semble très important => http://www.oscommerce-fr.info/forum/index.php?showtopic=31426
+		$pu = $pu / $tx_tva; // calcul du nouvel ht unitaire
 		
-		switch ($object->element) {
+		_updateLine($object, $line, $pu);
+		$i++;
+	}
+
+	if ($i > 0)
+	{
+		// on ajoute à la dernière ligne la différence de centime
+		$line->fetch($line->id);
+		
+		$tx_tva = 1 + ($line->tva_tx / 100);
+		$diff_compta = $newTotal - $object->total_ttc; // diff entre le total voulu et le nouveau total calculé (décalage de centimes)
+		$diff_compta = $diff_compta / $line->qty; // diff à diviser par la qty car on doit obtenir au final un prix unitaire
+		$pu = $line->subprice * $tx_tva; // calcul du ttc unitaire
+		$pu = $pu + $diff_compta;
+		$pu = $pu / $tx_tva; // calcul du nouvel ht unitaire
+		
+		_updateLine($object, $line, $pu);
+	}
+	
+	function _updateLine(&$object, &$line, $pu)
+	{
+		switch ($object->element) 
+		{
 			case 'propal':
 				//$rowid, $pu, $qty, $remise_percent, $txtva, $txlocaltax1=0.0, $txlocaltax2=0.0, $desc='', $price_base_type='HT', $info_bits=0, $special_code=0, $fk_parent_line=0, $skip_update_total=0, $fk_fournprice=0, $pa_ht=0, $label='', $type=0, $date_start='', $date_end='', $array_options=0, $fk_unit=null
 				$object->updateline($line->id, $pu, $line->qty, $line->remise_percent, $line->tva_tx, $line->localtax1_tx, $line->localtax2_tx, $line->desc, 'HT', $line->info_bits, $line->special_code, $line->fk_parent_line, $line->skip_update_total, 0, $line->pa_ht, $line->label, $line->product_type, $line->date_start, $line->date_end, $line->array_options, $line->fk_unit);
@@ -41,7 +63,4 @@
 				$object->updateline($line->id, $line->desc, $pu, $line->qty, $line->remise_percent, $line->date_start, $line->date_end, $line->tva_tx, $line->localtax1_tx, $line->localtax2_tx, 'HT', $line->info_bits, $line->product_type, $line->fk_parent_line, $line->skip_update_total, 0, $line->pa_ht, $line->label, $line->special_code, $line->array_options, $line->situation_percent, $line->fk_unit);
 				break;
 		}
-		
 	}
-	
-	echo $coef;

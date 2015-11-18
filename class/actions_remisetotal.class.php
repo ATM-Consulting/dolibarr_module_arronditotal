@@ -126,6 +126,7 @@ class Actionsremisetotal
 				    $( "#dialog-prompt-remisetotal" ).remove();
 				    $('body').append('<div id="dialog-prompt-remisetotal"><input id="remisetotal-title" size=30 value="'+total+'" /></div>');
 				    
+                    $('#remisetotal-title').select();
 				    $( "#dialog-prompt-remisetotal" ).dialog({
                     	resizable: false,
                         height:140,
@@ -141,8 +142,7 @@ class Actionsremisetotal
                                 		,newTotal: $(this).find('#remisetotal-title').val()
                                 	}
                                 }).then(function (data) {
-                                	//document.location.href=url_to;
-                                	console.log(data);
+                                	document.location.href=url_to;
                                 });
 
                                 $( this ).dialog( "close" );
@@ -151,7 +151,12 @@ class Actionsremisetotal
                                 $( this ).dialog( "close" );
                             }
                         }
+                    }).keypress(function(e) {
+                    	if (e.keyCode == $.ui.keyCode.ENTER) {
+					          $('.ui-dialog').find('button:contains("Ok")').trigger('click');
+					    }
                     });
+                    
 				}
 				
 				$('a#remisetotalButton').click(function() 
