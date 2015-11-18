@@ -10,6 +10,7 @@ remisetotalAbout = A propos du module Remise sur total
 remisetotalAddButtonOnPropal=Ajouter le bouton sur les propositions commerciales
 remisetotalAddButtonOnOrder=Ajouter le bouton sur les commandes clients
 remisetotalAddButtonOnInvoice=Ajouter le bouton sur les factures clients
+remisetotalUpdateLineWithQty=Quantité nécessaire sur les lignes pour re-calculer (vide pour prendre toutes les lignes)
 
 # DOCUMENT
 remisetotalLabelButton=Modifier total

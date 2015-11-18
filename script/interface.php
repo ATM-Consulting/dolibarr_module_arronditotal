@@ -17,9 +17,19 @@
 	$object = new $className($db);
 	$object->fetch($fk_object);
 	
-	$coef = $newTotal / $object->total_ttc;
-	$i = 0;
+	if (empty($conf->global->REMISETOTAL_QTY_NEEDED_TO_UPDATE))
+	{
+		$coef = $newTotal / $object->total_ttc;
+	}
+	else 
+	{
+		$delta = $object->total_ttc - $newTotal;
+		$totalByQty = _getTotalByQty($object, $conf->global->REMISETOTAL_QTY_NEEDED_TO_UPDATE);
+		
+		$coef = ($totalByQty - $delta) / $totalByQty;
+	}
 	
+	$lastLine = false;
 	foreach ($object->lines as $line)
 	{
 		$tx_tva = 1 + ($line->tva_tx / 100);
@@ -27,23 +37,35 @@
 		$pu = $pu * $coef; // on applique le coef de réduction
 		$pu = $pu / $tx_tva; // calcul du nouvel ht unitaire
 		
-		_updateLine($object, $line, $pu);
-		$i++;
+		if (!empty($conf->global->REMISETOTAL_QTY_NEEDED_TO_UPDATE))
+		{
+			if ($line->qty == $conf->global->REMISETOTAL_QTY_NEEDED_TO_UPDATE) 
+			{
+				_updateLine($object, $line, $pu);
+				$lastLine = &$line;
+			}
+		}
+		else 
+		{
+			_updateLine($object, $line, $pu);
+			$lastLine = &$line;
+		}
+		
 	}
 
-	if ($i > 0)
+	if ($lastLine)
 	{
 		// on ajoute à la dernière ligne la différence de centime
-		$line->fetch($line->id);
+		$lastLine->fetch($lastLine->id);
 		
-		$tx_tva = 1 + ($line->tva_tx / 100);
+		$tx_tva = 1 + ($lastLine->tva_tx / 100);
 		$diff_compta = $newTotal - $object->total_ttc; // diff entre le total voulu et le nouveau total calculé (décalage de centimes)
-		$diff_compta = $diff_compta / $line->qty; // diff à diviser par la qty car on doit obtenir au final un prix unitaire
-		$pu = $line->subprice * $tx_tva; // calcul du ttc unitaire
+		$diff_compta = $diff_compta / $lastLine->qty; // diff à diviser par la qty car on doit obtenir au final un prix unitaire
+		$pu = $lastLine->subprice * $tx_tva; // calcul du ttc unitaire
 		$pu = $pu + $diff_compta;
 		$pu = $pu / $tx_tva; // calcul du nouvel ht unitaire
 		
-		_updateLine($object, $line, $pu);
+		_updateLine($object, $lastLine, $pu);
 	}
 	
 	function _updateLine(&$object, &$line, $pu)
@@ -63,4 +85,19 @@
 				$object->updateline($line->id, $line->desc, $pu, $line->qty, $line->remise_percent, $line->date_start, $line->date_end, $line->tva_tx, $line->localtax1_tx, $line->localtax2_tx, 'HT', $line->info_bits, $line->product_type, $line->fk_parent_line, $line->skip_update_total, 0, $line->pa_ht, $line->label, $line->special_code, $line->array_options, $line->situation_percent, $line->fk_unit);
 				break;
 		}
+	}
+
+	function _getTotalByQty(&$object, $qty)
+	{
+		$total = 0;
+		
+		foreach ($object->lines as $line)
+		{
+			if ($line->qty == $qty)
+			{
+				$total += $line->total_ttc;
+			}
+		}
+		
+		return $total;
 	}

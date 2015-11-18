@@ -166,6 +166,7 @@ class Actionsremisetotal
 						,'<?php echo dol_buildpath('/remisetotal/script/interface.php', 2); ?>'
 					     
 					);
+					
 					return false;
 				});
 				
