@@ -1,7 +1,22 @@
-Module104870Name = remisetotal
-Module104870Desc = remisetotal Descripion
+Module104870Name = Total discount
+Module104870Desc = Rounds the total by re-impacting the difference on each document's line
 
 ATMAbout = This module has been developed by <a href="http://www.atm-consulting.fr" target="_blank">ATM Consulting</a><br>You can find the documentation on our <a href="http://wiki.atm-consulting.fr/index.php/Accueil" target="_blank">wiki</a><br><br>For any question or feedback, contact us on <a href="mailto:support@atm-consulting.fr">support@atm-consulting.fr</a><br><br>For any commercial question, contact us on <a href="mailto:contact@atm-consulting.fr">contact@atm-consulting.fr</a> or at +33 9 77 19 50 70<br><br>Find our other modules on <a href="http://www.dolistore.com/search.php?orderby=position&orderway=desc&search_query=atm&submit_search=Rechercher" target="_blank">Dolistore</a>
 
-remisetotalSetup = remisetotal module setup
-remisetotalAbout = About remisetotal
+remisetotalSetup = Total discount module setup
+remisetotalAbout = About total discount
+
+# SETUP
+remisetotalModeB2B=Enable mode B2B
+remisetotalAddButtonOnPropal=Add button on proposals
+remisetotalAddButtonOnOrder=Add button on customers orders
+remisetotalAddButtonOnInvoice=Add button on customers invoices
+remisetotalUpdateLineWithQty=Quantity necessary on each line to recalculate (empty to take all lines)
+
+# DOCUMENT
+remisetotalLabelButton=Update total
+remisetotalNewTotalHT=New total HT
+remisetotalNewTotalTTC=New total TTC
+
+# ERROR
+remisetotalErrorNoLine=Erreur : no line found to calculate the new total
