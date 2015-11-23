@@ -96,22 +96,22 @@ class Actionsremisetotal
 		switch ($parameters['currentcontext']) 
 		{
 			case 'propalcard':
-				if ($conf->global->REMISETOTAL_ADD_BUTTON_ON_PROPAL) $this->_printForm($object, $action, '/comm/propal.php?id='.$object->id);
+				if ($conf->global->REMISETOTAL_ADD_BUTTON_ON_PROPAL) $this->_printForm($conf, $object, $action, '/comm/propal.php?id='.$object->id);
 				break;
 			case 'ordercard':
-				if ($conf->global->REMISETOTAL_ADD_BUTTON_ON_ORDER) $this->_printForm($object, $action, '/commande/card.php?id='.$object->id);
+				if ($conf->global->REMISETOTAL_ADD_BUTTON_ON_ORDER) $this->_printForm($conf, $object, $action, '/commande/card.php?id='.$object->id);
 				break;
 			case 'invoicecard':
-				if ($conf->global->REMISETOTAL_ADD_BUTTON_ON_INVOICE) $this->_printForm($object, $action, '/compta/facture.php?id='.$object->id);
+				if ($conf->global->REMISETOTAL_ADD_BUTTON_ON_INVOICE) $this->_printForm($conf, $object, $action, '/compta/facture.php?id='.$object->id);
 				break;
 		}
 		
 	}
 	
-	private function _printForm(&$object, $action, $url)
+	private function _printForm(&$conf, &$object, $action, $url)
 	{
 		global $langs;
-		
+
 		?>
 		<div class="inline-block divButAction">
 			<a id="remisetotalButton" class="butAction" href="#"><?php echo $langs->trans('remisetotalLabelButton'); ?></a>
@@ -122,7 +122,7 @@ class Actionsremisetotal
 			{
 				function promptRemiseTotal(url_to, url_ajax)
 				{
-					var total = "<?php echo price($object->total_ttc); ?>";
+					var total = "<?php echo !empty($conf->global->REMISETOTAL_B2B) ? price($object->total_ht) : price($object->total_ttc); ?>";
 				    $( "#dialog-prompt-remisetotal" ).remove();
 				    $('body').append('<div id="dialog-prompt-remisetotal"><input id="remisetotal-title" size=30 value="'+total+'" /></div>');
 				    
@@ -131,7 +131,7 @@ class Actionsremisetotal
                     	resizable: false,
                         height:140,
                         modal: true,
-                        title: "<?php echo $langs->transnoentitiesnoconv('remisetotalNewTotal') ?>",
+                        title: "<?php echo !empty($conf->global->REMISETOTAL_B2B) ? $langs->transnoentitiesnoconv('remisetotalNewTotalHT') : $langs->transnoentitiesnoconv('remisetotalNewTotalTTC'); ?>",
                         buttons: {
                             "Ok": function() {
                                 $.ajax({

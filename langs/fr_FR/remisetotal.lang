@@ -7,6 +7,7 @@ remisetotalSetup = Configuration du module remisetotal
 remisetotalAbout = A propos du module Remise sur total
 
 # SETUP
+remisetotalModeB2B=Activer le mode B2B
 remisetotalAddButtonOnPropal=Ajouter le bouton sur les propositions commerciales
 remisetotalAddButtonOnOrder=Ajouter le bouton sur les commandes clients
 remisetotalAddButtonOnInvoice=Ajouter le bouton sur les factures clients
@@ -14,7 +15,8 @@ remisetotalUpdateLineWithQty=Quantité nécessaire sur les lignes pour re-calcul
 
 # DOCUMENT
 remisetotalLabelButton=Modifier total
-remisetotalNewTotal=Nouveau total TTC
+remisetotalNewTotalHT=Nouveau total HT
+remisetotalNewTotalTTC=Nouveau total TTC
 
 # ERROR
 remisetotalErrorNoLine=Erreur : aucune ligne trouvée pour recalculer le total

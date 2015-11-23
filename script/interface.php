@@ -17,14 +17,17 @@
 	$object = new $className($db);
 	$object->fetch($fk_object);
 	
+	if (!empty($conf->global->REMISETOTAL_B2B)) $field_total = 'total_ht';
+	else $field_total = 'total_ttc';
+	
 	if (empty($conf->global->REMISETOTAL_QTY_NEEDED_TO_UPDATE))
 	{
-		$coef = $newTotal / $object->total_ttc;
+		$coef = $newTotal / $object->{$field_total};
 	}
 	else 
 	{
-		$delta = $object->total_ttc - $newTotal;
-		$totalByQty = _getTotalByQty($object, $conf->global->REMISETOTAL_QTY_NEEDED_TO_UPDATE);
+		$delta = $object->{$field_total} - $newTotal;
+		$totalByQty = _getTotalByQty($object, $conf->global->REMISETOTAL_QTY_NEEDED_TO_UPDATE, $field_total);
 		
 		$coef = ($totalByQty - $delta) / $totalByQty;
 	}
@@ -32,8 +35,17 @@
 	$lastLine = false;
 	foreach ($object->lines as $line)
 	{
-		$tx_tva = 1 + ($line->tva_tx / 100);
-		$pu = $line->subprice * $tx_tva; // calcul du ttc unitaire
+		if (!empty($conf->global->REMISETOTAL_B2B))
+		{
+			$tx_tva = 1;
+			$pu = $line->subprice;
+		}
+		else
+		{
+			$tx_tva = 1 + ($line->tva_tx / 100);
+			$pu = $line->subprice * $tx_tva; // calcul du ttc unitaire
+		}
+		
 		$pu = $pu * $coef; // on applique le coef de réduction
 		$pu = $pu / $tx_tva; // calcul du nouvel ht unitaire
 		
@@ -58,8 +70,10 @@
 		// on ajoute à la dernière ligne la différence de centime
 		$lastLine->fetch($lastLine->id);
 		
-		$tx_tva = 1 + ($lastLine->tva_tx / 100);
-		$diff_compta = $newTotal - $object->total_ttc; // diff entre le total voulu et le nouveau total calculé (décalage de centimes)
+		if (!empty($conf->global->REMISETOTAL_B2B)) $tx_tva = 1;
+		else $tx_tva = 1 + ($lastLine->tva_tx / 100);
+		
+		$diff_compta = $newTotal - $object->{$field_total}; // diff entre le total voulu et le nouveau total calculé (décalage de centimes)
 		$diff_compta = $diff_compta / $lastLine->qty; // diff à diviser par la qty car on doit obtenir au final un prix unitaire
 		$pu = $lastLine->subprice * $tx_tva; // calcul du ttc unitaire
 		$pu = $pu + $diff_compta;
@@ -91,7 +105,7 @@
 		}
 	}
 
-	function _getTotalByQty(&$object, $qty)
+	function _getTotalByQty(&$object, $qty, $field_total)
 	{
 		$total = 0;
 		
@@ -99,7 +113,7 @@
 		{
 			if ($line->qty == $qty)
 			{
-				$total += $line->total_ttc;
+				$total += $line->{$field_total};
 			}
 		}
 		
