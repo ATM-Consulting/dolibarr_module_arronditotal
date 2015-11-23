@@ -20,3 +20,5 @@ remisetotalNewTotalTTC=Nouveau total TTC
 
 # ERROR
 remisetotalErrorNoLine=Erreur : aucune ligne trouvée pour recalculer le total
+remisetotalErrorObjectNotDraft=Erreur : le document n'est pas à l'état brouillon
+remisetotalErrorTypeInvoice=Erreur : le type de facture n'est pas compatible avec la fonctionnalité

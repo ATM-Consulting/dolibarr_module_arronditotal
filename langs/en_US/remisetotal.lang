@@ -19,4 +19,6 @@ remisetotalNewTotalHT=New total HT
 remisetotalNewTotalTTC=New total TTC
 
 # ERROR
-remisetotalErrorNoLine=Erreur : no line found to calculate the new total
+remisetotalErrorNoLine=Error : no line found to calculate the new total
+remisetotalErrorObjectNotDraft=Error : the document is not draft status
+remisetotalErrorTypeInvoice=Error : the type of invoice is not compatible with the functionality
