@@ -7,7 +7,7 @@ remisetotalSetup = Configuration du module remisetotal
 remisetotalAbout = A propos du module Remise sur total
 
 # SETUP
-remisetotalModeB2B=Activer le mode B2B
+remisetotalModeB2B=Activer le mode B2B (utiliser le total HT)
 remisetotalAddButtonOnPropal=Ajouter le bouton sur les propositions commerciales
 remisetotalAddButtonOnOrder=Ajouter le bouton sur les commandes clients
 remisetotalAddButtonOnInvoice=Ajouter le bouton sur les factures clients

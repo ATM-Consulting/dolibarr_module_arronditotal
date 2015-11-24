@@ -7,7 +7,7 @@ remisetotalSetup = Total discount module setup
 remisetotalAbout = About total discount
 
 # SETUP
-remisetotalModeB2B=Enable mode B2B
+remisetotalModeB2B=Enable mode B2B (use total HT)
 remisetotalAddButtonOnPropal=Add button on proposals
 remisetotalAddButtonOnOrder=Add button on customers orders
 remisetotalAddButtonOnInvoice=Add button on customers invoices
