@@ -82,6 +82,9 @@
 		$pu = $pu / $tx_tva; // calcul du nouvel ht unitaire
 		
 		_updateLine($object, $lastLine, $pu);
+		
+		$outputlangs = &_getOutPutLangs($object);
+		$object->generateDocument('', $outputlangs);
 	}
 	else
 	{
@@ -139,4 +142,17 @@
 		}
 		
 		return $total;
+	}
+	
+	function _getOutPutLangs(&$object)
+	{
+		global $conf;
+		
+		$object->fetch_thirdparty();
+		
+		$outputlangs = new Translate('',$conf);
+		$langcode = ( !empty($object->thirdparty->country_code)  ? $object->thirdparty->country_code : (empty($conf->global->MAIN_LANG_DEFAULT) ? 'auto' : $conf->global->MAIN_LANG_DEFAULT) );
+		$outputlangs->setDefaultLang($langcode);
+		
+		return $outputlangs;
 	}
