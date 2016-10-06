@@ -3,22 +3,22 @@ Module104870Desc = Rounds the total by re-impacting the difference on each docum
 
 ATMAbout = This module has been developed by <a href="http://www.atm-consulting.fr" target="_blank">ATM Consulting</a><br>You can find the documentation on our <a href="http://wiki.atm-consulting.fr/index.php/Accueil" target="_blank">wiki</a><br><br>For any question or feedback, contact us on <a href="mailto:support@atm-consulting.fr">support@atm-consulting.fr</a><br><br>For any commercial question, contact us on <a href="mailto:contact@atm-consulting.fr">contact@atm-consulting.fr</a> or at +33 9 77 19 50 70<br><br>Find our other modules on <a href="http://www.dolistore.com/search.php?orderby=position&orderway=desc&search_query=atm&submit_search=Rechercher" target="_blank">Dolistore</a>
 
-remisetotalSetup = Total discount module setup
-remisetotalAbout = About total discount
+arronditotalSetup = Total discount module setup
+arronditotalAbout = About total discount
 
 # SETUP
-remisetotalModeB2B=Enable mode B2B (use total HT)
-remisetotalAddButtonOnPropal=Add button on proposals
-remisetotalAddButtonOnOrder=Add button on customers orders
-remisetotalAddButtonOnInvoice=Add button on customers invoices
-remisetotalUpdateLineWithQty=Quantity necessary on each line to recalculate (empty to take all lines)
+arronditotalModeB2B=Enable mode B2B (use total HT)
+arronditotalAddButtonOnPropal=Add button on proposals
+arronditotalAddButtonOnOrder=Add button on customers orders
+arronditotalAddButtonOnInvoice=Add button on customers invoices
+arronditotalUpdateLineWithQty=Quantity necessary on each line to recalculate (empty to take all lines)
 
 # DOCUMENT
-remisetotalLabelButton=Update total
-remisetotalNewTotalHT=New total HT
-remisetotalNewTotalTTC=New total TTC
+arronditotalLabelButton=Update total
+arronditotalNewTotalHT=New total HT
+arronditotalNewTotalTTC=New total TTC
 
 # ERROR
-remisetotalErrorNoLine=Error : no line found to calculate the new total
-remisetotalErrorObjectNotDraft=Error : the document is not draft status
-remisetotalErrorTypeInvoice=Error : the type of invoice is not compatible with the functionality
+arronditotalErrorNoLine=Error : no line found to calculate the new total
+arronditotalErrorObjectNotDraft=Error : the document is not draft status
+arronditotalErrorTypeInvoice=Error : the type of invoice is not compatible with the functionality

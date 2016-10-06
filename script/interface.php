@@ -19,17 +19,17 @@
 	
 	_exitOrNot($object, $className);
 	
-	if (!empty($conf->global->REMISETOTAL_B2B)) $field_total = 'total_ht';
+	if (!empty($conf->global->ARRONDITOTAL_B2B)) $field_total = 'total_ht';
 	else $field_total = 'total_ttc';
 	
-	if (empty($conf->global->REMISETOTAL_QTY_NEEDED_TO_UPDATE))
+	if (empty($conf->global->ARRONDITOTAL_QTY_NEEDED_TO_UPDATE))
 	{
 		$coef = $newTotal / $object->{$field_total};
 	}
 	else 
 	{
 		$delta = $object->{$field_total} - $newTotal;
-		$totalByQty = _getTotalByQty($object, $conf->global->REMISETOTAL_QTY_NEEDED_TO_UPDATE, $field_total);
+		$totalByQty = _getTotalByQty($object, $conf->global->ARRONDITOTAL_QTY_NEEDED_TO_UPDATE, $field_total);
 		
 		$coef = ($totalByQty - $delta) / $totalByQty;
 	}
@@ -37,7 +37,7 @@
 	$lastLine = false;
 	foreach ($object->lines as $line)
 	{
-		if (!empty($conf->global->REMISETOTAL_B2B))
+		if (!empty($conf->global->ARRONDITOTAL_B2B))
 		{
 			$tx_tva = 1;
 			$pu = $line->subprice;
@@ -51,9 +51,9 @@
 		$pu = $pu * $coef; // on applique le coef de réduction
 		$pu = $pu / $tx_tva; // calcul du nouvel ht unitaire
 		
-		if (!empty($conf->global->REMISETOTAL_QTY_NEEDED_TO_UPDATE))
+		if (!empty($conf->global->ARRONDITOTAL_QTY_NEEDED_TO_UPDATE))
 		{
-			if ($line->qty == $conf->global->REMISETOTAL_QTY_NEEDED_TO_UPDATE) 
+			if ($line->qty == $conf->global->ARRONDITOTAL_QTY_NEEDED_TO_UPDATE) 
 			{
 				_updateLine($object, $line, $pu);
 				$lastLine = &$line;
@@ -72,7 +72,7 @@
 		// on ajoute à la dernière ligne la différence de centime
 		$lastLine->fetch($lastLine->id);
 		
-		if (!empty($conf->global->REMISETOTAL_B2B)) $tx_tva = 1;
+		if (!empty($conf->global->ARRONDITOTAL_B2B)) $tx_tva = 1;
 		else $tx_tva = 1 + ($lastLine->tva_tx / 100);
 		
 		$diff_compta = $newTotal - $object->{$field_total}; // diff entre le total voulu et le nouveau total calculé (décalage de centimes)
@@ -88,14 +88,14 @@
 	}
 	else
 	{
-		setEventMessages($langs->trans('remisetotalErrorNoLine'), null, 'errors');
+		setEventMessages($langs->trans('arronditotalErrorNoLine'), null, 'errors');
 	}
 	
 	function _exitOrNot(&$object, $className)
 	{
 		if ($object->statut != $className::STATUS_DRAFT)
 		{
-			setEventMessages($langs->trans('remisetotalErrorObjectNotDraft'), null, 'errors');
+			setEventMessages($langs->trans('arronditotalErrorObjectNotDraft'), null, 'errors');
 			exit;
 		}
 		
@@ -103,7 +103,7 @@
 		{
 			if ($object->type == Facture::TYPE_REPLACEMENT || $object->type == Facture::TYPE_CREDIT_NOTE || $object->type == Facture::TYPE_SITUATION)
 			{
-				setEventMessages($langs->trans('remisetotalErrorTypeInvoice'), null, 'errors');
+				setEventMessages($langs->trans('arronditotalErrorTypeInvoice'), null, 'errors');
 				exit;
 			}
 		}

@@ -17,8 +17,8 @@
  */
 
 /**
- * 	\file		admin/remisetotal.php
- * 	\ingroup	remisetotal
+ * 	\file		admin/arronditotal.php
+ * 	\ingroup	arronditotal
  * 	\brief		This file is an example module setup page
  * 				Put some comments here
  */
@@ -30,10 +30,10 @@ if (! $res) {
 
 // Libraries
 require_once DOL_DOCUMENT_ROOT . "/core/lib/admin.lib.php";
-require_once '../lib/remisetotal.lib.php';
+require_once '../lib/arronditotal.lib.php';
 
 // Translations
-$langs->load("remisetotal@remisetotal");
+$langs->load("arronditotal@arronditotal");
 
 // Access control
 if (! $user->admin) {
@@ -77,7 +77,7 @@ if (preg_match('/del_(.*)/',$action,$reg))
 /*
  * View
  */
-$page_name = "remisetotalSetup";
+$page_name = "arronditotalSetup";
 llxHeader('', $langs->trans($page_name));
 
 // Subheader
@@ -86,13 +86,13 @@ $linkback = '<a href="' . DOL_URL_ROOT . '/admin/modules.php">'
 print_fiche_titre($langs->trans($page_name), $linkback, 'title_setup.png');
 
 // Configuration header
-$head = remisetotalAdminPrepareHead();
+$head = arronditotalAdminPrepareHead();
 dol_fiche_head(
     $head,
     'settings',
     $langs->trans("Module104870Name"),
     0,
-    "remisetotal@remisetotal"
+    "arronditotal@arronditotal"
 );
 
 // Setup page goes here
@@ -106,65 +106,65 @@ print '<td align="center" width="100">'.$langs->trans("Value").'</td>'."\n";
 
 $var=!$var;
 print '<tr '.$bc[$var].'>';
-print '<td>'.$langs->trans("remisetotalModeB2B").'</td>';
+print '<td>'.$langs->trans("arronditotalModeB2B").'</td>';
 print '<td align="center" width="20">&nbsp;</td>';
 print '<td align="right" width="300">';
 print '<form method="POST" action="'.$_SERVER['PHP_SELF'].'">';
 print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
-print '<input type="hidden" name="action" value="set_REMISETOTAL_B2B">';
-print $form->selectyesno("REMISETOTAL_B2B",$conf->global->REMISETOTAL_B2B,1);
+print '<input type="hidden" name="action" value="set_ARRONDITOTAL_B2B">';
+print $form->selectyesno("ARRONDITOTAL_B2B",$conf->global->ARRONDITOTAL_B2B,1);
 print '<input type="submit" class="button" value="'.$langs->trans("Modify").'">';
 print '</form>';
 print '</td></tr>';
 
 $var=!$var;
 print '<tr '.$bc[$var].'>';
-print '<td>'.$langs->trans("remisetotalAddButtonOnPropal").'</td>';
+print '<td>'.$langs->trans("arronditotalAddButtonOnPropal").'</td>';
 print '<td align="center" width="20">&nbsp;</td>';
 print '<td align="right" width="300">';
 print '<form method="POST" action="'.$_SERVER['PHP_SELF'].'">';
 print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
-print '<input type="hidden" name="action" value="set_REMISETOTAL_ADD_BUTTON_ON_PROPAL">';
-print $form->selectyesno("REMISETOTAL_ADD_BUTTON_ON_PROPAL",$conf->global->REMISETOTAL_ADD_BUTTON_ON_PROPAL,1);
+print '<input type="hidden" name="action" value="set_ARRONDITOTAL_ADD_BUTTON_ON_PROPAL">';
+print $form->selectyesno("ARRONDITOTAL_ADD_BUTTON_ON_PROPAL",$conf->global->ARRONDITOTAL_ADD_BUTTON_ON_PROPAL,1);
 print '<input type="submit" class="button" value="'.$langs->trans("Modify").'">';
 print '</form>';
 print '</td></tr>';
 
 $var=!$var;
 print '<tr '.$bc[$var].'>';
-print '<td>'.$langs->trans("remisetotalAddButtonOnOrder").'</td>';
+print '<td>'.$langs->trans("arronditotalAddButtonOnOrder").'</td>';
 print '<td align="center" width="20">&nbsp;</td>';
 print '<td align="right" width="300">';
 print '<form method="POST" action="'.$_SERVER['PHP_SELF'].'">';
 print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
-print '<input type="hidden" name="action" value="set_REMISETOTAL_ADD_BUTTON_ON_ORDER">';
-print $form->selectyesno("REMISETOTAL_ADD_BUTTON_ON_ORDER",$conf->global->REMISETOTAL_ADD_BUTTON_ON_ORDER,1);
+print '<input type="hidden" name="action" value="set_ARRONDITOTAL_ADD_BUTTON_ON_ORDER">';
+print $form->selectyesno("ARRONDITOTAL_ADD_BUTTON_ON_ORDER",$conf->global->ARRONDITOTAL_ADD_BUTTON_ON_ORDER,1);
 print '<input type="submit" class="button" value="'.$langs->trans("Modify").'">';
 print '</form>';
 print '</td></tr>';
 
 $var=!$var;
 print '<tr '.$bc[$var].'>';
-print '<td>'.$langs->trans("remisetotalAddButtonOnInvoice").'</td>';
+print '<td>'.$langs->trans("arronditotalAddButtonOnInvoice").'</td>';
 print '<td align="center" width="20">&nbsp;</td>';
 print '<td align="right" width="300">';
 print '<form method="POST" action="'.$_SERVER['PHP_SELF'].'">';
 print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
-print '<input type="hidden" name="action" value="set_REMISETOTAL_ADD_BUTTON_ON_INVOICE">';
-print $form->selectyesno("REMISETOTAL_ADD_BUTTON_ON_INVOICE",$conf->global->REMISETOTAL_ADD_BUTTON_ON_INVOICE,1);
+print '<input type="hidden" name="action" value="set_ARRONDITOTAL_ADD_BUTTON_ON_INVOICE">';
+print $form->selectyesno("ARRONDITOTAL_ADD_BUTTON_ON_INVOICE",$conf->global->ARRONDITOTAL_ADD_BUTTON_ON_INVOICE,1);
 print '<input type="submit" class="button" value="'.$langs->trans("Modify").'">';
 print '</form>';
 print '</td></tr>';
 
 $var=!$var;
 print '<tr '.$bc[$var].'>';
-print '<td>'.$langs->trans("remisetotalUpdateLineWithQty").'</td>';
+print '<td>'.$langs->trans("arronditotalUpdateLineWithQty").'</td>';
 print '<td align="center" width="20">&nbsp;</td>';
 print '<td align="right" width="300">';
 print '<form method="POST" action="'.$_SERVER['PHP_SELF'].'">';
 print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
-print '<input type="hidden" name="action" value="set_REMISETOTAL_QTY_NEEDED_TO_UPDATE">';
-print '<input type="text" name="REMISETOTAL_QTY_NEEDED_TO_UPDATE" value="'.$conf->global->REMISETOTAL_QTY_NEEDED_TO_UPDATE.'" size="5" />&nbsp;';
+print '<input type="hidden" name="action" value="set_ARRONDITOTAL_QTY_NEEDED_TO_UPDATE">';
+print '<input type="text" name="ARRONDITOTAL_QTY_NEEDED_TO_UPDATE" value="'.$conf->global->ARRONDITOTAL_QTY_NEEDED_TO_UPDATE.'" size="5" />&nbsp;';
 print '<input type="submit" class="button" value="'.$langs->trans("Modify").'">';
 print '</form>';
 print '</td></tr>';

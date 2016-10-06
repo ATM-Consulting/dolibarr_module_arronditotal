@@ -18,7 +18,7 @@
 
 /**
  * 	\file		core/boxes/mybox.php
- * 	\ingroup	remisetotal
+ * 	\ingroup	arronditotal
  * 	\brief		This file is a sample box definition file
  * 				Put some comments here
  */
@@ -27,13 +27,13 @@ include_once DOL_DOCUMENT_ROOT . "/core/boxes/modules_boxes.php";
 /**
  * Class to manage the box
  */
-class remisetotalbox extends ModeleBoxes
+class arronditotalbox extends ModeleBoxes
 {
 
     public $boxcode = "mybox";
-    public $boximg = "remisetotal@remisetotal";
+    public $boximg = "arronditotal@arronditotal";
     public $boxlabel;
-    public $depends = array("remisetotal");
+    public $depends = array("arronditotal");
     public $db;
     public $param;
     public $info_box_head = array();
@@ -62,7 +62,7 @@ class remisetotalbox extends ModeleBoxes
 
         $this->max = $max;
 
-        //include_once DOL_DOCUMENT_ROOT . "/remisetotal/class/remisetotal.class.php";
+        //include_once DOL_DOCUMENT_ROOT . "/arronditotal/class/arronditotal.class.php";
 
         $text = $langs->trans("MyBoxDescription", $max);
         $this->info_box_head = array(

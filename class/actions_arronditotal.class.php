@@ -17,16 +17,16 @@
  */
 
 /**
- * \file    class/actions_remisetotal.class.php
- * \ingroup remisetotal
+ * \file    class/actions_arronditotal.class.php
+ * \ingroup arronditotal
  * \brief   This file is an example hook overload class file
  *          Put some comments here
  */
 
 /**
- * Class Actionsremisetotal
+ * Class Actionsarronditotal
  */
-class Actionsremisetotal
+class Actionsarronditotal
 {
 	/**
 	 * @var array Hook results. Propagated to $hookmanager->resArray for later reuse
@@ -50,7 +50,7 @@ class Actionsremisetotal
 	{
 		global $langs;
 		
-		$langs->load('remisetotal@remisetotal');
+		$langs->load('arronditotal@arronditotal');
 	}
 
 	/**
@@ -96,13 +96,13 @@ class Actionsremisetotal
 		switch ($parameters['currentcontext']) 
 		{
 			case 'propalcard':
-				if ($conf->global->REMISETOTAL_ADD_BUTTON_ON_PROPAL) $this->_printForm($conf, $object, $action, '/comm/propal.php?id='.$object->id);
+				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_PROPAL) $this->_printForm($conf, $object, $action, '/comm/propal.php?id='.$object->id);
 				break;
 			case 'ordercard':
-				if ($conf->global->REMISETOTAL_ADD_BUTTON_ON_ORDER) $this->_printForm($conf, $object, $action, '/commande/card.php?id='.$object->id);
+				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_ORDER) $this->_printForm($conf, $object, $action, '/commande/card.php?id='.$object->id);
 				break;
 			case 'invoicecard':
-				if ($conf->global->REMISETOTAL_ADD_BUTTON_ON_INVOICE) $this->_printForm($conf, $object, $action, '/compta/facture.php?id='.$object->id);
+				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_INVOICE) $this->_printForm($conf, $object, $action, '/compta/facture.php?id='.$object->id);
 				break;
 		}
 		
@@ -114,24 +114,24 @@ class Actionsremisetotal
 
 		?>
 		<div class="inline-block divButAction">
-			<a id="remisetotalButton" class="butAction" href="#"><?php echo $langs->trans('remisetotalLabelButton'); ?></a>
+			<a id="arronditotalButton" class="butAction" href="#"><?php echo $langs->trans('arronditotalLabelButton'); ?></a>
 		</div>
 		
 	 	<script type="text/javascript">
 			$(document).ready(function() 
 			{
-				function promptRemiseTotal(url_to, url_ajax)
+				function promptArrondiTotal(url_to, url_ajax)
 				{
-					var total = "<?php echo !empty($conf->global->REMISETOTAL_B2B) ? price($object->total_ht) : price($object->total_ttc); ?>";
-				    $( "#dialog-prompt-remisetotal" ).remove();
-				    $('body').append('<div id="dialog-prompt-remisetotal"><input id="remisetotal-title" size=30 value="'+total+'" /></div>');
+					var total = "<?php echo !empty($conf->global->ARRONDITOTAL_B2B) ? price($object->total_ht) : price($object->total_ttc); ?>";
+				    $( "#dialog-prompt-arronditotal" ).remove();
+				    $('body').append('<div id="dialog-prompt-arronditotal"><input id="arronditotal-title" size=30 value="'+total+'" /></div>');
 				    
-                    $('#remisetotal-title').select();
-				    $( "#dialog-prompt-remisetotal" ).dialog({
+                    $('#arronditotal-title').select();
+				    $( "#dialog-prompt-arronditotal" ).dialog({
                     	resizable: false,
                         height:140,
                         modal: true,
-                        title: "<?php echo !empty($conf->global->REMISETOTAL_B2B) ? $langs->transnoentitiesnoconv('remisetotalNewTotalHT') : $langs->transnoentitiesnoconv('remisetotalNewTotalTTC'); ?>",
+                        title: "<?php echo !empty($conf->global->ARRONDITOTAL_B2B) ? $langs->transnoentitiesnoconv('arronditotalNewTotalHT') : $langs->transnoentitiesnoconv('arronditotalNewTotalTTC'); ?>",
                         buttons: {
                             "Ok": function() {
                                 $.ajax({
@@ -139,7 +139,7 @@ class Actionsremisetotal
                                 	,data: {
                                 		fk_object: <?php echo (int) $object->id; ?>
                                 		,element: "<?php echo $object->element; ?>"
-                                		,newTotal: $(this).find('#remisetotal-title').val()
+                                		,newTotal: $(this).find('#arronditotal-title').val()
                                 	}
                                 }).then(function (data) {
                                 	document.location.href=url_to;
@@ -159,11 +159,11 @@ class Actionsremisetotal
                     
 				}
 				
-				$('a#remisetotalButton').click(function() 
+				$('a#arronditotalButton').click(function() 
 				{
-					promptRemiseTotal(
+					promptArrondiTotal(
 						'<?php echo dol_buildpath($url, 1); ?>'
-						,'<?php echo dol_buildpath('/remisetotal/script/interface.php', 2); ?>'
+						,'<?php echo dol_buildpath('/arronditotal/script/interface.php', 2); ?>'
 					     
 					);
 					

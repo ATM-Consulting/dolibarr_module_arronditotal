@@ -18,7 +18,7 @@
 
 /**
  * 	\file		admin/about.php
- * 	\ingroup	remisetotal
+ * 	\ingroup	arronditotal
  * 	\brief		This file is an example about page
  * 				Put some comments here
  */
@@ -30,10 +30,10 @@ if (! $res) {
 
 // Libraries
 require_once DOL_DOCUMENT_ROOT . "/core/lib/admin.lib.php";
-require_once '../lib/remisetotal.lib.php';
+require_once '../lib/arronditotal.lib.php';
 
 // Translations
-$langs->load("remisetotal@remisetotal");
+$langs->load("arronditotal@arronditotal");
 
 // Access control
 if (! $user->admin) {
@@ -43,7 +43,7 @@ if (! $user->admin) {
 /*
  * View
  */
-$page_name = "remisetotalAbout";
+$page_name = "arronditotalAbout";
 llxHeader('', $langs->trans($page_name));
 
 // Subheader
@@ -52,13 +52,13 @@ $linkback = '<a href="' . DOL_URL_ROOT . '/admin/modules.php">'
 print_fiche_titre($langs->trans($page_name), $linkback);
 
 // Configuration header
-$head = remisetotalAdminPrepareHead();
+$head = arronditotalAdminPrepareHead();
 dol_fiche_head(
     $head,
     'about',
     $langs->trans("Module104870Name"),
     0,
-    'remisetotal@remisetotal'
+    'arronditotal@arronditotal'
 );
 
 // About page goes here

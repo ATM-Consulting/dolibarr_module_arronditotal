@@ -17,8 +17,8 @@
  */
 
 /**
- * 	\file		core/triggers/interface_99_modMyodule_remisetotaltrigger.class.php
- * 	\ingroup	remisetotal
+ * 	\file		core/triggers/interface_99_modMyodule_arronditotaltrigger.class.php
+ * 	\ingroup	arronditotal
  * 	\brief		Sample trigger
  * 	\remarks	You can create other triggers by copying this one
  * 				- File name should be either:
@@ -33,7 +33,7 @@
 /**
  * Trigger class
  */
-class Interfaceremisetotaltrigger
+class Interfacearronditotaltrigger
 {
 
     private $db;
@@ -54,7 +54,7 @@ class Interfaceremisetotaltrigger
             . "They are provided for tutorial purpose only.";
         // 'development', 'experimental', 'dolibarr' or version
         $this->version = 'development';
-        $this->picto = 'remisetotal@remisetotal';
+        $this->picto = 'arronditotal@arronditotal';
     }
 
     /**
