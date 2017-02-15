@@ -93,16 +93,24 @@ class Actionsarronditotal
 	{
 		global $conf;
 		
+		$propalcard 	= '/comm/propal/card.php';
+		$facturecard 	= '/compta/facture.php';
+		$ordercard 		= '/commande/card.php';
+		
+		if((float) DOL_VERSION < 4.0 ) {
+			$propalcard = '/comm/propal.php';
+		}
+		
 		switch ($parameters['currentcontext']) 
 		{
 			case 'propalcard':
-				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_PROPAL) $this->_printForm($conf, $object, $action, '/comm/propal.php?id='.$object->id);
+				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_PROPAL) $this->_printForm($conf, $object, $action, $propalcard.'?id='.$object->id);
 				break;
 			case 'ordercard':
-				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_ORDER) $this->_printForm($conf, $object, $action, '/commande/card.php?id='.$object->id);
+				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_ORDER) $this->_printForm($conf, $object, $action, $ordercard.'?id='.$object->id);
 				break;
 			case 'invoicecard':
-				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_INVOICE) $this->_printForm($conf, $object, $action, '/compta/facture.php?id='.$object->id);
+				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_INVOICE) $this->_printForm($conf, $object, $action, $facturecard.'?id='.$object->id);
 				break;
 		}
 		
