@@ -171,7 +171,7 @@ class Actionsarronditotal
 				{
 					promptArrondiTotal(
 						'<?php echo dol_buildpath($url, 1); ?>'
-						,'<?php echo dol_buildpath('/arronditotal/script/interface.php', 2); ?>'
+						,'<?php echo dol_buildpath('/arronditotal/script/interface.php', 1); ?>'
 					     
 					);
 					
