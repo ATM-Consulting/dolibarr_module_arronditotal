@@ -104,13 +104,13 @@ class Actionsarronditotal
 		switch ($parameters['currentcontext']) 
 		{
 			case 'propalcard':
-				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_PROPAL) $this->_printForm($conf, $object, $action, $propalcard.'?id='.$object->id);
+				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_PROPAL && $object->statut == Propal::STATUS_DRAFT) $this->_printForm($conf, $object, $action, $propalcard.'?id='.$object->id);
 				break;
 			case 'ordercard':
-				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_ORDER) $this->_printForm($conf, $object, $action, $ordercard.'?id='.$object->id);
+				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_ORDER && $object->statut == Commande::STATUS_DRAFT) $this->_printForm($conf, $object, $action, $ordercard.'?id='.$object->id);
 				break;
 			case 'invoicecard':
-				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_INVOICE) $this->_printForm($conf, $object, $action, $facturecard.'?id='.$object->id);
+				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_INVOICE && $object->statut == Facture::STATUS_DRAFT) $this->_printForm($conf, $object, $action, $facturecard.'?id='.$object->id);
 				break;
 		}
 		
