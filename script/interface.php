@@ -49,20 +49,26 @@
 		}
 		
 		$pu = $pu * $coef; // on applique le coef de réduction
-		$pu = $pu / $tx_tva; // calcul du nouvel ht unitaire
+		$pu = round($pu / $tx_tva, 2); // calcul du nouvel ht unitaire
 		
 		if (!empty($conf->global->ARRONDITOTAL_QTY_NEEDED_TO_UPDATE))
 		{
 			if ($line->qty == $conf->global->ARRONDITOTAL_QTY_NEEDED_TO_UPDATE) 
 			{
-				_updateLine($object, $line, $pu);
-				$lastLine = &$line;
+			    
+			    if(empty($line->special_code)) {
+			        _updateLine($object, $line, $pu);
+				    $lastLine = $line;
+			    }
+				
 			}
 		}
 		else 
 		{
-			_updateLine($object, $line, $pu);
-			$lastLine = &$line;
+		    if(empty($line->special_code))  {
+		        _updateLine($object, $line, $pu);
+			    $lastLine = $line;
+		    } 
 		}
 		
 	}

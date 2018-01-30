@@ -150,7 +150,7 @@ class Actionsarronditotal
                                 		,newTotal: $(this).find('#arronditotal-title').val()
                                 	}
                                 }).then(function (data) {
-                                	document.location.href=url_to;
+                                    $('#builddoc_generatebutton').click();
                                 });
 
                                 $( this ).dialog( "close" );
