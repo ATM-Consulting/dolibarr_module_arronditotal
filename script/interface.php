@@ -85,7 +85,7 @@
 		$diff_compta = $diff_compta / $lastLine->qty; // diff à diviser par la qty car on doit obtenir au final un prix unitaire
 		$pu = $lastLine->subprice * $tx_tva; // calcul du ttc unitaire
 		$pu = $pu + $diff_compta;
-		$pu = $pu / $tx_tva; // calcul du nouvel ht unitaire
+		$pu = round($pu / $tx_tva, 2); // calcul du nouvel ht unitaire
 		
 		_updateLine($object, $lastLine, $pu);
 		
