@@ -57,7 +57,7 @@
 			{
 			    
 			    if(empty($line->special_code)) {
-			        _updateLine($object, $line, $pu);
+			        _updateElementLine($object, $line, $pu);
 				    $lastLine = $line;
 			    }
 				
@@ -66,7 +66,7 @@
 		else 
 		{
 		    if(empty($line->special_code))  {
-		        _updateLine($object, $line, $pu);
+		        _updateElementLine($object, $line, $pu);
 			    $lastLine = $line;
 		    } 
 		}
@@ -87,7 +87,7 @@
 		$pu = $pu + $diff_compta;
 		$pu = round($pu / $tx_tva, 2); // calcul du nouvel ht unitaire
 		
-		_updateLine($object, $lastLine, $pu);
+		_updateElementLine($object, $lastLine, $pu);
 		
 		$outputlangs = &_getOutPutLangs($object);
 		$object->generateDocument('', $outputlangs);
@@ -116,7 +116,7 @@
 		
 	}
 	
-	function _updateLine(&$object, &$line, $pu)
+	function _updateElementLine(&$object, &$line, $pu)
 	{
 		switch ($object->element) 
 		{
