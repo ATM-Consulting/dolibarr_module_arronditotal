@@ -59,7 +59,7 @@ if (preg_match('/set_(.*)/',$action,$reg))
 		dol_print_error($db);
 	}
 }
-	
+
 if (preg_match('/del_(.*)/',$action,$reg))
 {
 	$code=$reg[1];
@@ -110,7 +110,7 @@ print '<td>'.$langs->trans("arronditotalModeB2B").'</td>';
 print '<td align="center" width="20">&nbsp;</td>';
 print '<td align="right" width="300">';
 print '<form method="POST" action="'.$_SERVER['PHP_SELF'].'">';
-print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
+print '<input type="hidden" name="token" value="'.newToken().'">';
 print '<input type="hidden" name="action" value="set_ARRONDITOTAL_B2B">';
 print $form->selectyesno("ARRONDITOTAL_B2B",$conf->global->ARRONDITOTAL_B2B,1);
 print '<input type="submit" class="button" value="'.$langs->trans("Modify").'">';
@@ -123,7 +123,7 @@ print '<td>'.$langs->trans("arronditotalAddButtonOnPropal").'</td>';
 print '<td align="center" width="20">&nbsp;</td>';
 print '<td align="right" width="300">';
 print '<form method="POST" action="'.$_SERVER['PHP_SELF'].'">';
-print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
+print '<input type="hidden" name="token" value="'.newToken().'">';
 print '<input type="hidden" name="action" value="set_ARRONDITOTAL_ADD_BUTTON_ON_PROPAL">';
 print $form->selectyesno("ARRONDITOTAL_ADD_BUTTON_ON_PROPAL",$conf->global->ARRONDITOTAL_ADD_BUTTON_ON_PROPAL,1);
 print '<input type="submit" class="button" value="'.$langs->trans("Modify").'">';
@@ -136,7 +136,7 @@ print '<td>'.$langs->trans("arronditotalAddButtonOnOrder").'</td>';
 print '<td align="center" width="20">&nbsp;</td>';
 print '<td align="right" width="300">';
 print '<form method="POST" action="'.$_SERVER['PHP_SELF'].'">';
-print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
+print '<input type="hidden" name="token" value="'.newToken().'">';
 print '<input type="hidden" name="action" value="set_ARRONDITOTAL_ADD_BUTTON_ON_ORDER">';
 print $form->selectyesno("ARRONDITOTAL_ADD_BUTTON_ON_ORDER",$conf->global->ARRONDITOTAL_ADD_BUTTON_ON_ORDER,1);
 print '<input type="submit" class="button" value="'.$langs->trans("Modify").'">';
@@ -149,7 +149,7 @@ print '<td>'.$langs->trans("arronditotalAddButtonOnInvoice").'</td>';
 print '<td align="center" width="20">&nbsp;</td>';
 print '<td align="right" width="300">';
 print '<form method="POST" action="'.$_SERVER['PHP_SELF'].'">';
-print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
+print '<input type="hidden" name="token" value="'.newToken().'">';
 print '<input type="hidden" name="action" value="set_ARRONDITOTAL_ADD_BUTTON_ON_INVOICE">';
 print $form->selectyesno("ARRONDITOTAL_ADD_BUTTON_ON_INVOICE",$conf->global->ARRONDITOTAL_ADD_BUTTON_ON_INVOICE,1);
 print '<input type="submit" class="button" value="'.$langs->trans("Modify").'">';
@@ -162,7 +162,7 @@ print '<td>'.$langs->trans("arronditotalUpdateLineWithQty").'</td>';
 print '<td align="center" width="20">&nbsp;</td>';
 print '<td align="right" width="300">';
 print '<form method="POST" action="'.$_SERVER['PHP_SELF'].'">';
-print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
+print '<input type="hidden" name="token" value="'.newToken().'">';
 print '<input type="hidden" name="action" value="set_ARRONDITOTAL_QTY_NEEDED_TO_UPDATE">';
 print '<input type="text" name="ARRONDITOTAL_QTY_NEEDED_TO_UPDATE" value="'.$conf->global->ARRONDITOTAL_QTY_NEEDED_TO_UPDATE.'" size="5" />&nbsp;';
 print '<input type="submit" class="button" value="'.$langs->trans("Modify").'">';
