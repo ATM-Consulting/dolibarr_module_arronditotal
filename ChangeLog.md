@@ -6,6 +6,8 @@
 
 - NEW: mise en conformité du numéro de version + compatibilité Dolibarr
   v14 - *2021-09-16* - 1.1.0
+- FIX : Compatibility V13 - newToken() replaces
+  $_SESSION['newtoken'] - *2021-05-18* 1.0.1
 
 ## Version 1.0
 
