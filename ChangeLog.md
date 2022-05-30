@@ -3,7 +3,7 @@
 ## Not Released
 
 ## Version 1.1
-
+- FIX : FIX DIVIDED BY ZERO  - *30/05/2022)* - 1.1.1  
 - NEW: mise en conformité du numéro de version + compatibilité Dolibarr
   v14 - *2021-09-16* - 1.1.0
 - FIX : Compatibility V13 - newToken() replaces
