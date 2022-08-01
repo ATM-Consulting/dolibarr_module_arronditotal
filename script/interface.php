@@ -24,16 +24,21 @@
 	if (!empty($conf->global->ARRONDITOTAL_B2B)) $field_total = 'total_ht';
 	else $field_total = 'total_ttc';
 
+	$coef = 1;
 	if (empty($conf->global->ARRONDITOTAL_QTY_NEEDED_TO_UPDATE))
 	{
-		$coef = $newTotal / $object->{$field_total};
+		//var_dump($object);
+		if (!empty($object->{$field_total}) && doubleval($object->{$field_total}) != 0) {
+			$coef = $newTotal / $object->{$field_total};
+		}
 	}
 	else
 	{
 		$delta = $object->{$field_total} - $newTotal;
 		$totalByQty = _getTotalByQty($object, $conf->global->ARRONDITOTAL_QTY_NEEDED_TO_UPDATE, $field_total);
-
-		$coef = ($totalByQty - $delta) / $totalByQty;
+		if (!empty($totalByQty) && doubleval($totalByQty) != 0 ) {
+			$coef = ($totalByQty - $delta) / $totalByQty;
+		}
 	}
 
 	$lastLine = false;
