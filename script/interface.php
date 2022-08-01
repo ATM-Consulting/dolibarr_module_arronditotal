@@ -28,7 +28,7 @@
 	if (empty($conf->global->ARRONDITOTAL_QTY_NEEDED_TO_UPDATE))
 	{
 		//var_dump($object);
-		if (!empty($object->{$field_total}) && doubleval($object->{$field_total}) > 0) {
+		if (!empty($object->{$field_total}) && doubleval($object->{$field_total}) != 0) {
 			$coef = $newTotal / $object->{$field_total};
 		}
 	}
@@ -36,7 +36,7 @@
 	{
 		$delta = $object->{$field_total} - $newTotal;
 		$totalByQty = _getTotalByQty($object, $conf->global->ARRONDITOTAL_QTY_NEEDED_TO_UPDATE, $field_total);
-		if (!empty($totalByQty) && doubleval($totalByQty) > 0 ) {
+		if (!empty($totalByQty) && doubleval($totalByQty) != 0 ) {
 			$coef = ($totalByQty - $delta) / $totalByQty;
 		}
 	}
