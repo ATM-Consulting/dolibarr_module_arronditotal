@@ -4,6 +4,7 @@
 
 ## Version 1.1
 
+- FIX: Compatibility V16 - family and trigger - *24/06/2022* - 1.1.1
 - NEW: mise en conformité du numéro de version + compatibilité Dolibarr
   v14 - *2021-09-16* - 1.1.0
 - FIX : Compatibility V13 - newToken() replaces
