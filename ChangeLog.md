@@ -2,6 +2,9 @@
 
 ## Not Released
 
+- FIX : Compat V19 et php 8.2 - *30/11/2023)* - 1.2.0
+
+
 ## Version 1.1
 - FIX : Icon - *30/09/2022)* - 1.1.3
 - FIX : FIX DIVIDED BY ZERO  - *30/05/2022)* - 1.1.2  
