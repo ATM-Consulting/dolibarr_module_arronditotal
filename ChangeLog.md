@@ -2,7 +2,6 @@
 
 ## Not Released
 
-## Version 1.2
 - FIX : Compat V19 et php 8.2 - *30/11/2023)* - 1.2.0
 
 
