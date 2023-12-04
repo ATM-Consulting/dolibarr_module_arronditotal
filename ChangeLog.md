@@ -2,8 +2,8 @@
 
 ## Not Released
 
-- NEW : Compat V19 et php 8.2 - *30/11/2023)* - 1.2.0
-  Changed Dolibarr compatibility range to 12 min - 19 max
+- NEW : Compat V19 et php 8.2 - *30/11/2023)* - 1.2.0  
+  Changed Dolibarr compatibility range to 12 min - 19 max  
   Change PHP compatibility range to 7.0 min - 8.2 max
 
 
