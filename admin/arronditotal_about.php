@@ -49,11 +49,11 @@ llxHeader('', $langs->trans($page_name));
 // Subheader
 $linkback = '<a href="' . DOL_URL_ROOT . '/admin/modules.php">'
     . $langs->trans("BackToModuleList") . '</a>';
-print_fiche_titre($langs->trans($page_name), $linkback);
+print load_fiche_titre($langs->trans($page_name), $linkback, 'tools');
 
 // Configuration header
 $head = arronditotalAdminPrepareHead();
-dol_fiche_head(
+print dol_get_fiche_head(
     $head,
     'about',
     $langs->trans("Module104870Name"),
@@ -61,15 +61,18 @@ dol_fiche_head(
     'arronditotal@arronditotal'
 );
 
-// About page goes here
-print '<div style="float: left;"><img src="../img/Dolibarr_Preferred_Partner_logo.png" /></div>';
-print '<div>'.$langs->trans('ATMAbout').'</div>';
 
-dol_fiche_end();
+require_once __DIR__ . '/../class/techatm.class.php';
+$techATM = new \arronditotal\TechATM($db);
 
-print '<br><center>';
-print '<a href="http://www.atm-consulting.fr" target="_blank"><img src="../img/ATM_logo.jpg" /></a>';
-print '</center>';
+require_once __DIR__ . '/../core/modules/modarronditotal.class.php';
+$moduleDescriptor = new modarronditotal($db);
+
+print $techATM->getAboutPage($moduleDescriptor);
+
+
+// Page end
+print dol_get_fiche_end();
 
 llxFooter();
 
