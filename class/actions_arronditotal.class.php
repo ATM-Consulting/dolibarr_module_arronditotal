@@ -97,10 +97,7 @@ class Actionsarronditotal extends \arronditotal\RetroCompatCommonHookActions
 		$propalcard 	= '/comm/propal/card.php';
 		$facturecard 	= '/compta/facture.php';
 		$ordercard 		= '/commande/card.php';
-		
-		if((float) DOL_VERSION < 4.0 ) {
-			$propalcard = '/comm/propal.php';
-		}
+
 		
 		switch ($parameters['currentcontext']) 
 		{
