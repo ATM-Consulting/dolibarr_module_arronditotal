@@ -135,7 +135,8 @@ class Actionsarronditotal extends \arronditotal\RetroCompatCommonHookActions
                     $('#arronditotal-title').select();
 				    $( "#dialog-prompt-arronditotal" ).dialog({
                     	resizable: false,
-                        height:140,
+                        height: 'auto',
+			width: 'auto',
                         modal: true,
                         title: "<?php echo getDolGlobalString('ARRONDITOTAL_B2B') ? $langs->transnoentitiesnoconv('arronditotalNewTotalHT') : $langs->transnoentitiesnoconv('arronditotalNewTotalTTC'); ?>",
                         buttons: {
