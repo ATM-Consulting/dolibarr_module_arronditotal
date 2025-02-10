@@ -13,6 +13,7 @@
   Change PHP compatibility range to 7.0 min - 8.2 max
 
 ## Release 1.1
+- FIX : DA026102 Set width and height to auto to prevent overflow - *2025-02-10* - 1.1.4 
 - FIX : Icon - *30/09/2022)* - 1.1.3
 - FIX : FIX DIVIDED BY ZERO  - *30/05/2022)* - 1.1.2  
 - FIX: Compatibility V16 - family and trigger - *24/06/2022* - 1.1.1
