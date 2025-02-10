@@ -22,11 +22,12 @@
  * \brief   This file is an example hook overload class file
  *          Put some comments here
  */
+require_once __DIR__ . '/../backport/v19/core/class/commonhookactions.class.php';
 
 /**
  * Class Actionsarronditotal
  */
-class Actionsarronditotal
+class Actionsarronditotal extends \arronditotal\RetroCompatCommonHookActions
 {
 	/**
 	 * @var array Hook results. Propagated to $hookmanager->resArray for later reuse
@@ -105,13 +106,13 @@ class Actionsarronditotal
 		switch ($parameters['currentcontext'])
 		{
 			case 'propalcard':
-				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_PROPAL && $object->statut == Propal::STATUS_DRAFT) $this->_printForm($conf, $object, $action, $propalcard.'?id='.$object->id);
+				if (getDolGlobalString('ARRONDITOTAL_ADD_BUTTON_ON_PROPAL')  && $object->statut == Propal::STATUS_DRAFT) $this->_printForm($conf, $object, $action, $propalcard.'?id='.$object->id);
 				break;
 			case 'ordercard':
-				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_ORDER && $object->statut == Commande::STATUS_DRAFT) $this->_printForm($conf, $object, $action, $ordercard.'?id='.$object->id);
+				if (getDolGlobalString('ARRONDITOTAL_ADD_BUTTON_ON_ORDER')  && $object->statut == Commande::STATUS_DRAFT) $this->_printForm($conf, $object, $action, $ordercard.'?id='.$object->id);
 				break;
 			case 'invoicecard':
-				if ($conf->global->ARRONDITOTAL_ADD_BUTTON_ON_INVOICE && $object->statut == Facture::STATUS_DRAFT) $this->_printForm($conf, $object, $action, $facturecard.'?id='.$object->id);
+				if (getDolGlobalString('ARRONDITOTAL_ADD_BUTTON_ON_INVOICE')  && $object->statut == Facture::STATUS_DRAFT) $this->_printForm($conf, $object, $action, $facturecard.'?id='.$object->id);
 				break;
 		}
 
@@ -131,7 +132,7 @@ class Actionsarronditotal
 			{
 				function promptArrondiTotal(url_to, url_ajax)
 				{
-					var total = "<?php echo !empty($conf->global->ARRONDITOTAL_B2B) ? price($object->total_ht) : price($object->total_ttc); ?>";
+					var total = "<?php echo getDolGlobalString('ARRONDITOTAL_B2B') ? price($object->total_ht) : price($object->total_ttc); ?>";
 				    $( "#dialog-prompt-arronditotal" ).remove();
 				    $('body').append('<div id="dialog-prompt-arronditotal"><input id="arronditotal-title" size=30 value="'+total+'" /></div>');
 
@@ -141,7 +142,7 @@ class Actionsarronditotal
                         height: 'auto',
 						width: 'auto',
                         modal: true,
-                        title: "<?php echo !empty($conf->global->ARRONDITOTAL_B2B) ? $langs->transnoentitiesnoconv('arronditotalNewTotalHT') : $langs->transnoentitiesnoconv('arronditotalNewTotalTTC'); ?>",
+                        title: "<?php echo getDolGlobalString('ARRONDITOTAL_B2B') ? $langs->transnoentitiesnoconv('arronditotalNewTotalHT') : $langs->transnoentitiesnoconv('arronditotalNewTotalTTC'); ?>",
                         buttons: {
                             "Ok": function() {
                                 $.ajax({

@@ -21,11 +21,11 @@
 
 	_exitOrNot($object, $className);
 
-	if (!empty($conf->global->ARRONDITOTAL_B2B)) $field_total = 'total_ht';
+	if (getDolGlobalString('ARRONDITOTAL_B2B')) $field_total = 'total_ht';
 	else $field_total = 'total_ttc';
 
 	$coef = 1;
-	if (empty($conf->global->ARRONDITOTAL_QTY_NEEDED_TO_UPDATE))
+	if (!getDolGlobalString('ARRONDITOTAL_QTY_NEEDED_TO_UPDATE'))
 	{
 		//var_dump($object);
 		if (!empty($object->{$field_total}) && doubleval($object->{$field_total}) != 0) {
@@ -35,7 +35,7 @@
 	else
 	{
 		$delta = $object->{$field_total} - $newTotal;
-		$totalByQty = _getTotalByQty($object, $conf->global->ARRONDITOTAL_QTY_NEEDED_TO_UPDATE, $field_total);
+		$totalByQty = _getTotalByQty($object, getDolGlobalString('ARRONDITOTAL_QTY_NEEDED_TO_UPDATE') , $field_total);
 		if (!empty($totalByQty) && doubleval($totalByQty) != 0 ) {
 			$coef = ($totalByQty - $delta) / $totalByQty;
 		}
@@ -44,7 +44,7 @@
 	$lastLine = false;
 	foreach ($object->lines as $line)
 	{
-		if (!empty($conf->global->ARRONDITOTAL_B2B))
+		if (getDolGlobalString('ARRONDITOTAL_B2B'))
 		{
 			$tx_tva = 1;
 			$pu = $line->subprice;
@@ -58,9 +58,9 @@
 		$pu = $pu * $coef; // on applique le coef de réduction
 		$pu = $pu / $tx_tva; // calcul du nouvel ht unitaire
 
-		if (!empty($conf->global->ARRONDITOTAL_QTY_NEEDED_TO_UPDATE))
+		if (getDolGlobalString('ARRONDITOTAL_QTY_NEEDED_TO_UPDATE'))
 		{
-			if ($line->qty == $conf->global->ARRONDITOTAL_QTY_NEEDED_TO_UPDATE)
+			if ($line->qty == getDolGlobalString('ARRONDITOTAL_QTY_NEEDED_TO_UPDATE'))
 			{
 
 			    if(empty($line->special_code)) {
@@ -85,7 +85,7 @@
 		// on ajoute à la dernière ligne la différence de centime
 		$lastLine->fetch($lastLine->id);
 
-		if (!empty($conf->global->ARRONDITOTAL_B2B)) $tx_tva = 1;
+		if (getDolGlobalString('ARRONDITOTAL_B2B')) $tx_tva = 1;
 		else $tx_tva = 1 + ($lastLine->tva_tx / 100);
 
 		$diff_compta = $newTotal - $object->{$field_total}; // diff entre le total voulu et le nouveau total calculé (décalage de centimes)
@@ -164,7 +164,7 @@
 		$object->fetch_thirdparty();
 
 		$outputlangs = new Translate('',$conf);
-		$langcode = ( !empty($object->thirdparty->country_code)  ? $object->thirdparty->country_code : (empty($conf->global->MAIN_LANG_DEFAULT) ? 'auto' : $conf->global->MAIN_LANG_DEFAULT) );
+		$langcode = ( !empty($object->thirdparty->country_code)  ? $object->thirdparty->country_code : (!getDolGlobalString('MAIN_LANG_DEFAULT') ? 'auto' : getDolGlobalString('MAIN_LANG_DEFAULT')));
 		$outputlangs->setDefaultLang($langcode);
 
 		return $outputlangs;
