@@ -2,9 +2,11 @@
 
 ## Not Released
 
+## Release 1.4
+- FIX : COMPAT V21 - *06/01/2025* - 1.4.1
+- NEW : COMPAT V20 - *25/07/2024* - 1.4.0
 
 ## Release 1.3
-
 - NEW : TechATM + Page About - *24/01/2024)* - 1.3.0
 - NEW : Compat V19 et php 8.2 - *30/11/2023)* - 1.2.0  
   Changed Dolibarr compatibility range to 12 min - 19 max  
@@ -21,6 +23,5 @@
   $_SESSION['newtoken'] - *2021-05-18* 1.0.1
 
 ## Release 1.0
-
 - Pas de changelog jusqu'ici. NOTE: pas besoin de redémarrer le module entre 1.0
   et 1.1 (c'est juste que le numéro de version était en X.Y jusqu'ici)
