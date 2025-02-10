@@ -50,7 +50,7 @@ class Actionsarronditotal extends \arronditotal\RetroCompatCommonHookActions
 	public function __construct()
 	{
 		global $langs;
-		
+
 		$langs->load('arronditotal@arronditotal');
 	}
 
@@ -93,16 +93,17 @@ class Actionsarronditotal extends \arronditotal\RetroCompatCommonHookActions
 	function addMoreActionsButtons($parameters, &$object, &$action, $hookmanager)
 	{
 		global $conf;
-		
+
 		$propalcard 	= '/comm/propal/card.php';
 		$facturecard 	= '/compta/facture.php';
 		$ordercard 		= '/commande/card.php';
-		
+
 		if((float) DOL_VERSION < 4.0 ) {
 			$propalcard = '/comm/propal.php';
 		}
-		
-		switch ($parameters['currentcontext']) 
+
+
+		switch ($parameters['currentcontext'])
 		{
 			case 'propalcard':
 				if (getDolGlobalString('ARRONDITOTAL_ADD_BUTTON_ON_PROPAL')  && $object->statut == Propal::STATUS_DRAFT) $this->_printForm($conf, $object, $action, $propalcard.'?id='.$object->id);
@@ -114,9 +115,9 @@ class Actionsarronditotal extends \arronditotal\RetroCompatCommonHookActions
 				if (getDolGlobalString('ARRONDITOTAL_ADD_BUTTON_ON_INVOICE')  && $object->statut == Facture::STATUS_DRAFT) $this->_printForm($conf, $object, $action, $facturecard.'?id='.$object->id);
 				break;
 		}
-		
+
 	}
-	
+
 	private function _printForm(&$conf, &$object, $action, $url)
 	{
 		global $langs;
@@ -125,20 +126,21 @@ class Actionsarronditotal extends \arronditotal\RetroCompatCommonHookActions
 		<div class="inline-block divButAction">
 			<a id="arronditotalButton" class="butAction" href="#"><?php echo $langs->trans('arronditotalLabelButton'); ?></a>
 		</div>
-		
+
 	 	<script type="text/javascript">
-			$(document).ready(function() 
+			$(document).ready(function()
 			{
 				function promptArrondiTotal(url_to, url_ajax)
 				{
 					var total = "<?php echo getDolGlobalString('ARRONDITOTAL_B2B') ? price($object->total_ht) : price($object->total_ttc); ?>";
 				    $( "#dialog-prompt-arronditotal" ).remove();
 				    $('body').append('<div id="dialog-prompt-arronditotal"><input id="arronditotal-title" size=30 value="'+total+'" /></div>');
-				    
+
                     $('#arronditotal-title').select();
 				    $( "#dialog-prompt-arronditotal" ).dialog({
                     	resizable: false,
-                        height:140,
+                        height: 'auto',
+						width: 'auto',
                         modal: true,
                         title: "<?php echo getDolGlobalString('ARRONDITOTAL_B2B') ? $langs->transnoentitiesnoconv('arronditotalNewTotalHT') : $langs->transnoentitiesnoconv('arronditotalNewTotalTTC'); ?>",
                         buttons: {
@@ -165,24 +167,24 @@ class Actionsarronditotal extends \arronditotal\RetroCompatCommonHookActions
 					          $('.ui-dialog').find('button:contains("Ok")').trigger('click');
 					    }
                     });
-                    
+
 				}
-				
-				$('a#arronditotalButton').click(function() 
+
+				$('a#arronditotalButton').click(function()
 				{
 					promptArrondiTotal(
 						'<?php echo dol_buildpath($url, 1); ?>'
 						,'<?php echo dol_buildpath('/arronditotal/script/interface.php', 1); ?>'
-					     
+
 					);
-					
+
 					return false;
 				});
-				
+
 			});
 	 	</script>
 		<?php
-		
+
 	}
-	
+
 }
